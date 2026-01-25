@@ -18,15 +18,17 @@ async function main() {
 }
 
 app.set("view engine", "ejs");
-app.set("view", path)
+app.set("views", path.join(__dirname, "views"));
+
 
 app.get("/", (req, res) => {
     res.send("Hi, Iam root");
 });
 
+//index Route
 app.get("/listings", async (req, res) => {
-    const allListing = await Listing.find({});
-    res.render("index.ejs", {allListing});
+    const allListings = await Listing.find({});
+    res.render("listing/index.ejs", { allListings });
 });
 
 // app.get("/testListing", async (req,res) => {
