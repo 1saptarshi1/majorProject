@@ -1,19 +1,36 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <h3>Create a new listing</h3>
-    <form method="POST" action="/listings">
-        <input type="text" name="listing[title]" placeholder="enter title">
-        <br><br>
-        <textarea type="text" name="lisring[description]" placeholder="enter discription"></textarea>
-        <br><br>
-        <input type="text" name="listing[Image]" placeholder="enter URL/link">
-        <br><br>
-        <input type="number" name="listing[price]" placeholder="enter price">
-        <br><br>
-        <input type="text" name="listing[country]" placeholder="enter country">
-        <br><br>
-        <input type="text" name="listing[location]" placeholder="enter location">
-        <br><br>
-        <button>Add</button>
-    </form>
-</body>
+
+<h3>Create a new listing</h3>
+
+<form method="POST" action="/listings">
+
+    <!-- TITLE -->
+    <input type="text" name="listing[title]" placeholder="enter title">
+    <br><br>
+
+    <!-- DESCRIPTION (FIXED TYPO) -->
+    <textarea name="listing[description]" placeholder="enter description"></textarea>
+    <br><br>
+
+    <!-- IMAGE URL (IMPORTANT FIX) -->
+    <input
+        type="text"
+        name="listing[image][url]"
+        placeholder="enter image URL"
+    >
+    <br><br>
+
+    <!-- PRICE -->
+    <input type="number" name="listing[price]" placeholder="enter price">
+    <br><br>
+
+    <!-- COUNTRY -->
+    <input type="text" name="listing[country]" placeholder="enter country">
+    <br><br>
+
+    <!-- LOCATION -->
+    <input type="text" name="listing[location]" placeholder="enter location">
+    <br><br>
+
+    <button>Add</button>
+</form>
