@@ -4,20 +4,20 @@
     <div class="col-8 offset-2">
         <h3>Create a new listing</h3>
 
-        <form method="POST" action="/listings">
+        <form method="POST" action="/listings" class="needs-validation" novalidate>
             
 
             <!-- TITLE -->
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control">
+                <input type="text" name="listing[title]" required placeholder="Add a catchy title" class="form-control">
             </div>
             
 
             <!-- DESCRIPTION (FIXED TYPO) -->
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea name="listing[description]" class="form-control"></textarea>
+                <label for="description"  class="form-label">Description</label>
+                <textarea required name="listing[description]" class="form-control"></textarea>
             </div>
             
 
@@ -37,19 +37,19 @@
                 <!-- PRICE -->
                 <div class="mb-3 col-md-4">
                     <label for="price" class="form-label">Price</label>
-                    <input type="number" name="listing[price]" class="form-control" placeholder="1200">
+                    <input type="number" required name="listing[price]" class="form-control" placeholder="1200">
                 </div>
                 <!-- COUNTRY -->
                 <div class="mb-3 col-md-8">
-                    <label for="country" class="form-label">Conutry</label>
-                    <input type="text" name="listing[country]" class="form-control" placeholder="India">
+                    <label for="country"  class="form-label">Conutry</label>
+                    <input type="text" required name="listing[country]" class="form-control" placeholder="India">
                 </div>
            </div>
 
             <!-- LOCATION -->
             <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input type="text" name="listing[location]" class="form-control" placeholder="Jaipur, Rajasthan">
+                <label for="location"  class="form-label">Location</label>
+                <input type="text" required name="listing[location]" class="form-control" placeholder="Jaipur, Rajasthan">
             </div>
             <button class="btn btn-dark add-btn mt-3">Add</button>
         </form>
