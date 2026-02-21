@@ -1,4 +1,5 @@
 const mongoose = require("mongoose"); // import mongoose
+const review = require("./review");
 const { Schema } = mongoose; // extract Schema
 
 const listingSchema = new Schema({
@@ -25,6 +26,12 @@ const listingSchema = new Schema({
     price: Number,
     location: String,
     country: String,
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Review",
+        },
+    ],
 });
 
 module.exports = mongoose.model("Listing", listingSchema); // export the model
