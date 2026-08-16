@@ -5,6 +5,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -22,20 +24,41 @@ async function main() {
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-// Routes
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+const sessionOptions = {
+    secret: "thisshouldbeabettersecret!",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1 week
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    },
+};  
 
 // Root
 app.get("/", (req, res) => {
     res.redirect("/listings");
 });
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    console.log(res.locals.success);
+    console.log(res.locals.error);
+    next();
+});
+
+// Routes
+app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
 
 // 404 Handler
 app.use((req, res, next) => {
