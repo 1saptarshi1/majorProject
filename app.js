@@ -39,8 +39,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60, // time period in seconds
+    crypto: {
+        secret: process.env.SECRET
+    }
+});
+
 const sessionOptions = {
-    secret: "thisshouldbeabettersecret!",
+    store: store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
